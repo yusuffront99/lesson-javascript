@@ -5,21 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script> -->
 </head>
 <body>
     <h1>Javascript's</h1>
     <p>
         <div id="show"></div>
-        <button id="check">click</button>
+        <button onclick="load_ajax()">click</button>
     </p>
     
     <script>
-        $(document).ready(function(){
-            $("button").click(function(){
-                alert("hello")
-            });
-        });
+        function load_ajax() {
+            const ajax = new XMLHttpRequest()
+            ajax.open('GET', 'data.json', true)
+            ajax.onreadystatechange = function(){
+                if(this.readyState === 4 && this.status === 200){
+                    console.log(this.responseText)
+                }
+            }
+
+            ajax.send()
+        }
     </script>
 </body>
 </html>
