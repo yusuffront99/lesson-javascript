@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Hello Ajax</h1><br>
+    <li id="list"></li>
+    <button id="fetchBtn" onclick="handler()">click</button>
+
+    <script>
+        let fetchBtn = document.getElementById("fetchBtn");
+    
+    
+        fetchBtn.addEventListener("click", buttonclickhandler);
+    
+        function handler() {
+    
+            // Instantiate an new XHR Object
+            const xhr = new XMLHttpRequest();
+    
+            // Open an obejct (GET/POST, PATH,
+            // ASYN-TRUE/FALSE)
+            xhr.open("GET",
+    "http://dummy.restapiexample.com/api/v1/employees", true);
+    
+    
+    
+    
+            // When response is ready
+            xhr.onload = function () {
+                if (this.status === 200) {
+    
+                    // Changing string data into JSON Object
+                    obj = JSON.parse(this.responseText);
+    
+                    // Getting the ul element
+                    let list = document.getElementById("list");
+                    str = ""
+                    for (key in obj.data) {
+                        str += `<li>${obj.data[key].employee_name}</li>`;
+                    }
+                    list.innerHTML = str;
+                }
+                else {
+                    console.log("File not found");
+                }
+            }
+    
+            // At last send the request
+            xhr.send();
+        }
+    </script>
+    
+</body>
+</html>
