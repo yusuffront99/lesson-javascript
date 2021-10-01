@@ -10,7 +10,10 @@
 <body>
     <h1>Javascript's</h1>
     <p>
-        <div id="show"></div>
+        <p>
+            <li>Name : <small id="name"></small> </li>
+            <li>jurusan : <small id="jurusan"></small> </li>
+        </p>
         <button onclick="load_ajax()">click</button>
     </p>
     
@@ -20,7 +23,9 @@
             ajax.open('GET', 'data.json', true)
             ajax.onreadystatechange = function(){
                 if(this.readyState === 4 && this.status === 200){
-                    console.log(this.responseText)
+                    let data = (JSON.parse(this.responseText))
+                    document.getElementById('name').innerHTML = data.name;
+                    document.getElementById('jurusan').innerHTML = data.jurusan;
                 }
             }
 
